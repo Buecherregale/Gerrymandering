@@ -1,0 +1,23 @@
+{
+	"nodes":[
+		{"type":"file","file":"Gerrymandering/Feautures.md","id":"5bbd2138c4815483","x":-180,"y":180,"width":400,"height":400},
+		{"type":"file","file":"Gerrymandering/Main Menu.md","id":"2583968be516bf26","x":-180,"y":700,"width":400,"height":400},
+		{"type":"file","file":"Gerrymandering/Level Visuals.md","id":"4156049fda1c0c15","x":-660,"y":700,"width":400,"height":400},
+		{"type":"file","file":"Gerrymandering/Gameplay.md","id":"af86f1deaf8b7c0d","x":-660,"y":1260,"width":400,"height":400},
+		{"type":"file","file":"Gerrymandering/Requirments.md","id":"dc809e8d9014576e","x":-180,"y":-360,"width":400,"height":400},
+		{"type":"file","file":"Gerrymandering/World Map.md","id":"899d449d2c9987f4","x":-180,"y":1260,"width":400,"height":400},
+		{"type":"file","file":"Gerrymandering/Story.md","id":"eb7b487d3cfb41aa","x":-180,"y":1840,"width":400,"height":400},
+		{"id":"4da275f9f00d24fb","x":-1280,"y":1260,"width":400,"height":400,"type":"file","file":"Gerrymandering/Project Structure.md"},
+		{"id":"e58465577cbdb020","x":-1280,"y":1800,"width":400,"height":400,"type":"file","file":"Gerrymandering/Class Digramm.md"}
+	],
+	"edges":[
+		{"id":"89a5287f4bc8f332","fromNode":"dc809e8d9014576e","fromSide":"bottom","toNode":"5bbd2138c4815483","toSide":"top"},
+		{"id":"b1ae770720b6b550","fromNode":"5bbd2138c4815483","fromSide":"bottom","toNode":"2583968be516bf26","toSide":"top"},
+		{"id":"c7a486d3c1d74b51","fromNode":"2583968be516bf26","fromSide":"left","toNode":"4156049fda1c0c15","toSide":"right"},
+		{"id":"4cec906f4ef90479","fromNode":"899d449d2c9987f4","fromSide":"bottom","toNode":"eb7b487d3cfb41aa","toSide":"top"},
+		{"id":"c347c3ad8480f237","fromNode":"4156049fda1c0c15","fromSide":"bottom","toNode":"af86f1deaf8b7c0d","toSide":"top"},
+		{"id":"1f20bd040681d6cc","fromNode":"af86f1deaf8b7c0d","fromSide":"right","toNode":"899d449d2c9987f4","toSide":"left"},
+		{"id":"f0e0c4b699a0c837","fromNode":"af86f1deaf8b7c0d","fromSide":"left","toNode":"4da275f9f00d24fb","toSide":"right"},
+		{"id":"789ed62bc03e7db9","fromNode":"4da275f9f00d24fb","fromSide":"bottom","toNode":"e58465577cbdb020","toSide":"top"}
+	]
+}
