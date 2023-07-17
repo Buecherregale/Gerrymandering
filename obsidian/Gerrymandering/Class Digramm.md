@@ -1,13 +1,13 @@
 
 ```plantuml
 
-class CustomTile{
+class GerrymanderingTile {
 
 }
 
-class FactionTile {
+class District {
 	faction : Faction 
-	isMarked : boolean
+	marked : boolean
 	Neighbours: Neighbour[] 
 }
 
@@ -15,13 +15,13 @@ class VisualTile {
 
 }
 
-class Group {
-	factionTile : Tile[]
-	number : int
+class County {
+	District : District[]
+	id : int
 	faction : Faction 
 	- calculateDominant() : Faction
-	addTile() : boolean
-	removeTile()
+	AddDistrict() : boolean
+	RemoveDistrict()
 	- calulateNeighbours()
 }
 
@@ -30,16 +30,16 @@ enum Faction {
  Democrats
 }
 
-enum Neighbours{
+enum Neighbours {
 	top,
 	bot,
 	left,
 	right
 }
 
-FactionTile <|-- CustomTile
-VisualTile <|-- CustomTile
-Group o-- FactionTile : contains
+District <|-- GerrymanderingTile
+VisualTile <|-- GerrymanderingTile
+County o-- District : contains
 
 
 ```
