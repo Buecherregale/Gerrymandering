@@ -8,7 +8,7 @@
 		{"type":"file","file":"Gerrymandering/World Map.md","id":"899d449d2c9987f4","x":-180,"y":1260,"width":400,"height":400},
 		{"type":"file","file":"Gerrymandering/Story.md","id":"eb7b487d3cfb41aa","x":-180,"y":1840,"width":400,"height":400},
 		{"id":"4da275f9f00d24fb","x":-1280,"y":1260,"width":400,"height":400,"type":"file","file":"Gerrymandering/Project Structure.md"},
-		{"id":"e58465577cbdb020","x":-1280,"y":1800,"width":400,"height":400,"type":"file","file":"Gerrymandering/Class Digramm.md"}
+		{"id":"e58465577cbdb020","x":-1280,"y":1800,"width":400,"height":400,"type":"file","file":"Gerrymandering/Class Diagramm.md"}
 	],
 	"edges":[
 		{"id":"89a5287f4bc8f332","fromNode":"dc809e8d9014576e","fromSide":"bottom","toNode":"5bbd2138c4815483","toSide":"top"},
