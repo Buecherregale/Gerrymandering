@@ -1,5 +1,4 @@
-﻿using CustomEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace Util
@@ -33,7 +32,7 @@ namespace Util
         [Tooltip("4 Maps, one for every direction")]
         private Tilemap[] borderMaps;
 
-        [SerializeField] [Length(4, 4)]
+        [SerializeField]
         [Tooltip("4 Tiles, one for every direction")]
         private Tile[] borderTiles;
 
