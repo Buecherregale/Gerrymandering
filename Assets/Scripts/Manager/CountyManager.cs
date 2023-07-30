@@ -8,12 +8,15 @@ using Util;
 
 namespace Manager
 {
+    /// <summary>
+    /// manages <see cref="County"/>.
+    /// Whole class could be static
+    /// TODO: coloring and borders of counties
+    /// </summary>
     public class CountyManager: AbstractManager
     {
         [SerializeField] 
         private DistrictManager districtManager;
-
-        public List<County> Counties { get; } = new ();
 
         /// <summary>
         /// adds the district to the county
