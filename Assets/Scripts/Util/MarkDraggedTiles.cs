@@ -7,7 +7,7 @@ namespace Util
     public class MarkDraggedTiles: MonoBehaviour
     {
         [NotNull]
-        private readonly List<Vector3Int> _path = new ();
+        private readonly List<Vector3> _path = new ();
     
         private Camera _camera;
 
@@ -54,10 +54,10 @@ namespace Util
             }
         }
 
-        private Vector3Int ConvertPos(Vector2 pos)
+        private Vector3 ConvertPos(Vector2 pos)
         {
             var world = _camera.ScreenToWorldPoint(pos);
-            return Vector3Int.RoundToInt(world);
+            return world;
         }
     }
 }

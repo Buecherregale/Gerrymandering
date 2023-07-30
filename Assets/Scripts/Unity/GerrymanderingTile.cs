@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Tilemaps;
 
-namespace Model
+namespace Unity
 {
     public class GerrymanderingTile: Tile
     {
