@@ -160,8 +160,8 @@ namespace Manager
             _drawingCounty = false;
             _currentCounty = null;
             
-            if (currentCountyCount == maxCounties) {
-                text.text = "You took " + _factionToWin + " to win the state";
+            if (currentCountyCount == maxCounties && _currentState.Winning == _factionToWin) {
+                text.text = "You took the " + _factionToWin + " to win the state";
             }
         }
 
