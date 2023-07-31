@@ -3,6 +3,12 @@ tags: todo
 priority: 1
 ---
 
+Controls:
+	Touch/Mouse:
+	Dragging für Markieren von Tiles zu neuem District
+	Einzelner Click auf District zum löschen
+
+
 Tilemaps:
 
 ```c#

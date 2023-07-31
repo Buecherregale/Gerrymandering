@@ -1,55 +1,36 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
+using Manager;
+using Unity;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace Model
 {
     /// <summary>
-    /// smallest part in the voting system
-    /// it's the tile you click on
-    /// it is contained by a single <see cref="Model.County"/>
+    /// models the smallest part of the voting system.
+    /// only holds data.
+    /// Multiple Districts form a <see cref="Model.County"/>.
+    /// Districts are managed by a <see cref="DistrictManager"/>
     /// </summary>
-    public class District: GerrymanderingTile
+    public class District
     {
-        public County County { get; set; }
-        public Faction Faction { get; set; } 
-
-        public bool Marked { get; set; }
-
-        /// <summary>
-        /// see: <see cref="Neighbours"/>
-        /// </summary>
-        [SerializeField] 
-        private Tilemap tilemap;
+        private static int _instanceCounter;
         
-        /// <summary>
-        /// calculates all neighbours to this tile that exist
-        /// and are of type <see cref="District"/>
-        /// This needs access to the tilemap AND it's position within it
-        /// min length is 0 but practically it should be at least 2
-        /// max length is 4 if all neighbours exist
-        /// </summary>
-        /// <returns>an enumerable containing neighbouring tiles</returns>
         [NotNull]
-        public IEnumerable<District> Neighbours()
-        {
-            // Define the relative positions of the neighboring tiles
-            Vector3Int[] neighborOffsets = {
-                new(0, 1, 0),  // Top
-                new(0, -1, 0), // Bottom
-                new(1, 0, 0),  // Right
-                new(-1, 0, 0)  // Left
-            };
+        public readonly DistrictTile Tile;
+        
+        public readonly int Id;
 
-            return (from offset in neighborOffsets
-                let tilePosition = Vector3Int.RoundToInt(transform.GetPosition()) 
-                select tilePosition + offset into neighborPosition 
-                select tilemap.GetTile<District>(neighborPosition) into neighborTile 
-                where neighborTile != null 
-                select neighborTile)
-                .ToArray();
+        [CanBeNull]
+        public County County { get; internal set; }
+        public Faction Faction => Tile.Faction;
+        public Vector3Int Position { get; private set; }
+        
+        public District([NotNull] DistrictTile tile, Vector3Int pos)
+        {
+            Tile = tile;
+            Position = pos;
+            Id = _instanceCounter;
+            _instanceCounter++;
         }
     }
 }

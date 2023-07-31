@@ -5,6 +5,12 @@
 - [ ] #todo  Interaction/Gameplay [[Gameplay]]
 - [ ] #todo Story [[Story]]
 
+4 verschiedene Modi: 
+	- Kampagne
+	- Level mit versch. Schwierigkeit
+	- Prozedural-Generierte Level
+	- Steal the Election
+
 ```dataview
 TABLE
 priority as Priority

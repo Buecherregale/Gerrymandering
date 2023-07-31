@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Gerrymandering/Feautures.md",
-                "mode": "preview",
+                "file": "Gerrymandering/Gameplay.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Gerrymandering/Feautures.md",
+                "file": "Gerrymandering/Gameplay.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Gerrymandering/Feautures.md",
+                "file": "Gerrymandering/Gameplay.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Gerrymandering/Feautures.md"
+                "file": "Gerrymandering/Gameplay.md"
               }
             }
           }
@@ -148,7 +148,16 @@
   },
   "active": "378c06cc598a0f72",
   "lastOpenFiles": [
+    "Gerrymandering/Feautures.md",
+    "Gerrymandering/Gameplay.md",
+    "Gerrymandering/Story.md",
+    "Gerrymandering/World Map.md",
+    "Gerrymandering/Requirments.md",
+    "Gerrymandering/Main Menu.md",
+    "Gerrymandering/Level Visuals.md",
     "Gerrymandering/Class Diagramm.md",
-    "Gerrymandering/Feautures.md"
+    "Fotos/Tiles.png",
+    "Gerrymandering/Project Structure.md",
+    "Gerrymandering/Gerrymandering Canvas.canvas"
   ]
 }
