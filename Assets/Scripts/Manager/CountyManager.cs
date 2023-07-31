@@ -34,16 +34,10 @@ namespace Manager
             county.Winning = CalculateWinning(county);
             
             districtManager.DrawCountyBorder(district);
-            foreach (var neighbour in districtManager.GetAllNeighbours(district.Position))
+
+            foreach (var tempDistricts in county.Districts)
             {
-                if (!(county.Districts.Contains(districtManager.GetDistrict(neighbour)))) continue;
-                var neighbourDist = districtManager.GetDistrict(neighbour);
-                districtManager.ClearCountyBorders(neighbourDist);
-                districtManager.DrawCountyBorder(neighbourDist);
-            }
-            if (county.Districts.Count != stateManager.MaxCountySize) return true;
-            
-            foreach (var tempDistricts in county.Districts) {
+                districtManager.ClearCountyBorders(tempDistricts);
                 districtManager.DrawCountyBorder(tempDistricts);
             }
 
@@ -64,11 +58,11 @@ namespace Manager
             district.County = null;
             
             districtManager.ClearCountyBorders(district);
-            foreach (var neighbour in districtManager.GetAllNeighbours(district.Position))
+            
+            foreach (var tempDistricts in county.Districts)
             {
-                var neighbourDist = districtManager.GetDistrict(neighbour);
-                districtManager.ClearCountyBorders(neighbourDist);
-                districtManager.DrawCountyBorder(neighbourDist);
+                districtManager.ClearCountyBorders(tempDistricts);
+                districtManager.DrawCountyBorder(tempDistricts);
             }
 
             return true;
