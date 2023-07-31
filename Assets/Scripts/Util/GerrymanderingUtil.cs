@@ -16,7 +16,8 @@ namespace Util
 
     public abstract class GerrymanderingUtil
     {
-        private static Vector3Int DirToVec(Direction direction)
+        [Pure]
+        public static Vector3Int DirToVec(Direction direction)
         {
             return direction switch
             {
@@ -26,6 +27,20 @@ namespace Util
                 Direction.Bottom => Vector3Int.down,
                 _ => Vector3Int.zero
             };
+        }
+
+        [Pure]
+        public static Direction VecToDir(Vector3Int origin, Vector3Int next)
+        {
+            if ((origin - next).sqrMagnitude != 1) throw new ArgumentException("the vectors need to be 1 apart");
+
+            var diff = origin - next;
+
+            if (diff == Vector3Int.left) return Direction.Left;
+            if (diff == Vector3Int.up) return Direction.Top;
+            if (diff == Vector3Int.right) return Direction.Right;
+            if (diff == Vector3Int.down) return Direction.Bottom;
+            throw new ArgumentException("direction is neither left, top, right, bottom");
         }
         
         [Pure]

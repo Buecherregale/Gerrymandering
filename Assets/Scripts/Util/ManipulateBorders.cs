@@ -8,25 +8,6 @@ namespace Util
     /// </summary>
     public class ManipulateBorders: MonoBehaviour
     {
-        public enum Direction
-        {
-            Left,
-            Top,
-            Right,
-            Bottom
-        }
-
-        private static Vector3Int Mapper(Direction direction)
-        {
-            return direction switch
-            {
-                Direction.Left => Vector3Int.left,
-                Direction.Top => Vector3Int.up,
-                Direction.Right => Vector3Int.right,
-                Direction.Bottom => Vector3Int.down,
-                _ => Vector3Int.zero
-            };
-        }
 
         [SerializeField]
         [Tooltip("4 Maps, one for every direction")]
@@ -41,7 +22,7 @@ namespace Util
             SetBorder(position, direction);
             var complementary = ((int) direction + 2) % 4;
             var complDir = (Direction)complementary;
-            SetBorder(position + Mapper(complDir), complDir);
+            SetBorder(position + GerrymanderingUtil.DirToVec(complDir), complDir);
         }
 
         private void SetBorder(Vector3Int position, Direction direction)

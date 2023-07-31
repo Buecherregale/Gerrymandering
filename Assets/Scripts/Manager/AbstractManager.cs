@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace Manager
@@ -11,17 +10,22 @@ namespace Manager
     /// </summary>
     public class AbstractManager: MonoBehaviour
     {
-        [SerializeField] protected Tilemap districtMap;
-        [SerializeField] protected Tilemap markMap;
-        [SerializeField] protected Tilemap[] borderMaps = new Tilemap[4];
+        [SerializeField] [Tooltip("Map consisting of DistrictTiles representing the votes")]
+        protected Tilemap districtMap;
+        [SerializeField] [Tooltip("Map for the mark tiles")] 
+        protected Tilemap markMap;
+        [SerializeField]  [Tooltip("4 Maps, one for every direction")] 
+        protected Tilemap[] borderMaps = new Tilemap[4];
 
-        [SerializeField] protected Tile[] borderTiles = new Tile[4];
-        [SerializeField] protected Tile markTile;
+        [SerializeField] [Tooltip("4 Tiles, one for every direction")] 
+        protected Tile[] borderTiles = new Tile[4];
+        [SerializeField] [Tooltip("Tile to mark the district in winning color")]
+        protected Tile markTile;
         
         /// <summary>
         /// always call this for validation as child class
         /// </summary>
-        private void OnValidate()
+        protected void OnValidate()
         {
             if (districtMap == null) throw new ArgumentException();
             if (markMap == null) throw new ArgumentException();

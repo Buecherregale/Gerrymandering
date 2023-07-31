@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Model;
@@ -35,6 +34,14 @@ namespace Manager
             district.County = county;
             county.Winning = CalculateWinning(county);
             
+            districtManager.DrawCountyBorder(district);
+            foreach (var neighbour in districtManager.CalculateNeighbours(district.Position))
+            {
+                var neighbourDist = districtManager.GetDistrict(neighbour);
+                districtManager.ClearCountyBorders(neighbourDist);
+                districtManager.DrawCountyBorder(neighbourDist);
+            }
+            
             return true;
         }
 
@@ -50,6 +57,14 @@ namespace Manager
             if (!county.Districts.Contains(district)) return false;
             county.Districts.Remove(district);
             district.County = null;
+            
+            districtManager.ClearCountyBorders(district);
+            foreach (var neighbour in districtManager.CalculateNeighbours(district.Position))
+            {
+                var neighbourDist = districtManager.GetDistrict(neighbour);
+                districtManager.ClearCountyBorders(neighbourDist);
+                districtManager.DrawCountyBorder(neighbourDist);
+            }
 
             return true;
         }

@@ -6,6 +6,7 @@ using Model;
 using Unity;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Util;
 
 namespace Manager
 {
@@ -66,6 +67,36 @@ namespace Manager
             }
             district = null;
             return false;
+        }
+        
+        /// <summary>
+        /// draws the county border on every side of the district that points to a different county than district 
+        /// </summary>
+        /// <param name="district">the last added district</param>
+        public void DrawCountyBorder([NotNull] District district)
+        {
+            if (district.County == null)
+                return;
+            
+            CalculateNeighbours(district.Position)
+                .Select(GetDistrict)
+                .Where(neighbour => district.County != neighbour.County)
+                .Select(neighbour => GerrymanderingUtil.VecToDir(neighbour.Position, district.Position))
+                .ToList()
+                .ForEach(direction =>
+                    borderMaps[(int)direction].SetTile(district.Position, borderTiles[(int)direction]));
+        }
+
+        /// <summary>
+        /// deletes all county borders on the district
+        /// </summary>
+        /// <param name="district">a district to clear the tiles from</param>
+        public void ClearCountyBorders([NotNull] District district)
+        {
+            foreach (var borderMap in borderMaps)
+            {
+                if (borderMap.HasTile(district.Position)) borderMap.SetTile(district.Position, null);
+            }
         }
         
         /// <summary>

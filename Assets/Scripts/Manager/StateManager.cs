@@ -15,6 +15,8 @@ namespace Manager
         [SerializeField] private CountyManager countyManager;
         [SerializeField] private DistrictManager districtManager;
 
+        [SerializeField] private int maxDistrictSize = 3;
+
         [NotNull]
         private readonly State _currentState = new (0);
 
@@ -125,14 +127,14 @@ namespace Manager
         {
             if (!_drawingCounty) return;
 
-            if (_currentCounty.Size < 2)
+            Debug.Log(_currentCounty.Size);
+            
+            if (_currentCounty.Size < 2 || _currentCounty.Size > maxDistrictSize)
             {
                 countyManager.Clear(_currentCounty);
                 RemoveCounty(_currentState, _currentCounty);
             }
 
-            Debug.Log(_currentCounty.Size);
-            
             _drawingCounty = false;
             _currentCounty = null;
         }
