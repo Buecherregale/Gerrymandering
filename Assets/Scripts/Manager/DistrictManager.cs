@@ -46,8 +46,8 @@ namespace Manager
 
         /// <summary>
         /// ALL neighbouring districts even diagonals.
-        /// Also includes the null tiles.
-        /// Does not guarantee that the tilemap has a tile at the position
+        /// Does not include the null tiles.
+        /// Does guarantee that the tilemap has a tile at the position
         /// </summary>
         /// <param name="pos"></param>
         /// <returns>ALL neighbouring tile locations</returns>
@@ -68,7 +68,10 @@ namespace Manager
             };
 
             return from offset in neighbourOffsets
-                select pos + offset;
+                select pos + offset
+                into neighbourPosition
+                where districtMap.HasTile(neighbourPosition)
+                select neighbourPosition;
         }
 
         /// <param name="pos">cell position on <see cref="AbstractManager.districtMap"/></param>
@@ -109,10 +112,10 @@ namespace Manager
             if (district.County == null)
                 return;
             
-            CalculateNeighbours(district.Position)
+            GetAllNeighbours(district.Position)
                 .Select(GetDistrict)
                 .Where(neighbour => district.County != neighbour.County)
-                .Select(neighbour => GerrymanderingUtil.VecToDir(neighbour.Position, district.Position))
+                .Select(neighbour => GerrymanderingUtil.VecToDiagDir(neighbour.Position, district.Position))
                 .ToList()
                 .ForEach(direction =>
                     borderMaps[(int)direction].SetTile(district.Position, borderTiles[(int)direction]));
