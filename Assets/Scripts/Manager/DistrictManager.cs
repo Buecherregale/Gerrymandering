@@ -109,7 +109,7 @@ namespace Manager
         /// draws the county border on every side of the district that points to a different county than district 
         /// </summary>
         /// <param name="district">the last added district</param>
-        public void DrawCountyBorder([NotNull] District district, Faction faction)
+        public void DrawCountyBorder([NotNull] District district)
         {
             if (district.County == null)
                 return;
@@ -118,20 +118,9 @@ namespace Manager
                 .Where(neighbour => district.County != neighbour.County)
                 .Select(neighbour => GerrymanderingUtil.VecToDiagDir(neighbour.Position, district.Position))
                 .ToList()
-                .ForEach(direction => {
-                    switch (faction) {
-                        case Faction.Neutral:
-                            tileManager.borderMaps[(int)direction].SetTile(district.Position, tileManager.borderTilesNeutral[(int)direction]);
-                            break;
-                        case Faction.Republicans:
-                            tileManager.borderMaps[(int)direction].SetTile(district.Position, tileManager.borderTilesRepublicans[(int)direction]);
-                            break;
-                        case Faction.Democrats:
-                            tileManager.borderMaps[(int)direction].SetTile(district.Position, tileManager.borderTilesDemocrats[(int)direction]);
-                            break;
-                    }
-                    
-                });
+                .ForEach(direction => 
+                    tileManager.borderMaps[(int) direction]
+                        .SetTile(district.Position, tileManager.BorderTilesByParty[(int) district.County.Winning][(int) direction]));
         }
 
         /// <summary>

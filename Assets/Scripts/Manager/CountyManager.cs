@@ -9,7 +9,6 @@ namespace Manager
 {
     /// <summary>
     /// manages <see cref="County"/>.
-    /// TODO: coloring and borders of counties
     /// </summary>
     public class CountyManager: MonoBehaviour
     {
@@ -34,22 +33,20 @@ namespace Manager
             district.County = county;
             county.Winning = CalculateWinning(county);
             
-            districtManager.DrawCountyBorder(district, county.Winning);
+            districtManager.DrawCountyBorder(district);
             foreach (var neighbour in districtManager.GetAllNeighbours(district.Position))
             {
                 if (!(county.Districts.Contains(districtManager.GetDistrict(neighbour)))) continue;
                 var neighbourDist = districtManager.GetDistrict(neighbour);
                 districtManager.ClearCountyBorders(neighbourDist);
-                districtManager.DrawCountyBorder(neighbourDist, county.Winning);
+                districtManager.DrawCountyBorder(neighbourDist);
+            }
+            if (county.Districts.Count != stateManager.MaxCountySize) return true;
+            
+            foreach (var tempDistricts in county.Districts) {
+                districtManager.DrawCountyBorder(tempDistricts);
             }
 
-            if (county.Districts.Count == stateManager.MaxCountySize) {
-                Debug.Log("showing county borders");
-                foreach (var tmpdistricts in county.Districts) {
-                    districtManager.DrawCountyBorder(tmpdistricts, county.Winning);
-                }
-            }
-            
             return true;
         }
 
@@ -71,7 +68,7 @@ namespace Manager
             {
                 var neighbourDist = districtManager.GetDistrict(neighbour);
                 districtManager.ClearCountyBorders(neighbourDist);
-                districtManager.DrawCountyBorder(neighbourDist, Faction.Neutral);
+                districtManager.DrawCountyBorder(neighbourDist);
             }
 
             return true;
@@ -106,7 +103,12 @@ namespace Manager
                 votes[(int) dist.Faction]++;
             }
 
-            return (Faction) GerrymanderingUtil.MaxIndex(votes);
+            var maxInd = GerrymanderingUtil.MaxIndex(votes);
+            
+            if (votes.Count(x => x == votes[maxInd]) >= 2)
+                return Faction.Neutral;
+            
+            return (Faction) maxInd;
         }
 
         /// <summary>
