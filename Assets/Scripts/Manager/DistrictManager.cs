@@ -10,6 +10,10 @@ using Util;
 
 namespace Manager
 {
+    /// <summary>
+    /// manages the <see cref="District"/>.
+    /// Able to get all DistrictTiles based on position.
+    /// </summary>
     public class DistrictManager : AbstractManager
     {
         [NotNull] private readonly Dictionary<Vector3Int, District> _districts = new();
@@ -39,7 +43,34 @@ namespace Manager
                 where districtMap.HasTile(neighbourPosition)
                 select neighbourPosition;
         }
-        
+
+        /// <summary>
+        /// ALL neighbouring districts even diagonals.
+        /// Also includes the null tiles.
+        /// Does not guarantee that the tilemap has a tile at the position
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns>ALL neighbouring tile locations</returns>
+        [NotNull]
+        [Pure]
+        public IEnumerable<Vector3Int> GetAllNeighbours(Vector3Int pos)
+        {
+            Vector3Int[] neighbourOffsets =
+            {
+                new(-1, 0, 0), // Left
+                new (-1, 1, 0), // Top Left
+                new (0, 1, 0), // Top
+                new(1, 1, 0), // Top Right
+                new(1, 0, 0), // Right,
+                new (1, -1, 0), // Bottom Right
+                new(0, -1, 0), // Bottom
+                new(-1, -1, 0) // Bottom Left
+            };
+
+            return from offset in neighbourOffsets
+                select pos + offset;
+        }
+
         /// <param name="pos">cell position on <see cref="AbstractManager.districtMap"/></param>
         /// <returns>the district at the position</returns>
         /// <exception cref="ArgumentException">if there is no district</exception>
@@ -104,7 +135,6 @@ namespace Manager
         /// awake or start?
         /// enters the information for every tile
         /// tiles in <see cref="AbstractManager.districtMap"/> have to be <see cref="DistrictTile">Districts</see>
-        /// <exception cref="ArgumentException">if a tile is not a <see cref="DistrictTile"/></exception>
         /// </summary>
         private void Start()
         {
@@ -117,8 +147,7 @@ namespace Manager
                 {
                     var tileCellPos = new Vector3Int(x, y, 0);
                     var tile = districtMap.GetTile<DistrictTile>(tileCellPos);
-
-                    // if (tile == null) throw new ArgumentException("tile " + tile + " is not a District. Position: " + districtMap.CellToWorld(tileCellPos));
+                    
                     if (tile == null) continue;
                     
                     _districts.Add(tileCellPos, new District(tile, tileCellPos, 0));

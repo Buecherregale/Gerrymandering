@@ -8,7 +8,7 @@ namespace Model
     /// <summary>
     /// models the smallest part of the voting system.
     /// only holds data.
-    /// Multiple Districts form a <see cref="County"/>.
+    /// Multiple Districts form a <see cref="Model.County"/>.
     /// Districts are managed by a <see cref="DistrictManager"/>
     /// </summary>
     public class District
