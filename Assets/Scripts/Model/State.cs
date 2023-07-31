@@ -11,6 +11,8 @@ namespace Model
     /// </summary>
     public class State
     {
+        private static int _instanceCounter;
+        
         [NotNull] [ItemNotNull]
         public List<County> Counties { get; } = new();
         
@@ -20,9 +22,10 @@ namespace Model
 
         public readonly int Id;
 
-        public State(int id)
+        public State()
         {
-            Id = id;
+            Id = _instanceCounter;
+            _instanceCounter++;
         }
     }
 }

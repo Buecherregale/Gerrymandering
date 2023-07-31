@@ -34,7 +34,7 @@ namespace Manager
             county.Winning = CalculateWinning(county);
             
             districtManager.DrawCountyBorder(district);
-            foreach (var neighbour in districtManager.CalculateNeighbours(district.Position))
+            foreach (var neighbour in districtManager.GetAllNeighbours(district.Position))
             {
                 var neighbourDist = districtManager.GetDistrict(neighbour);
                 districtManager.ClearCountyBorders(neighbourDist);
@@ -58,7 +58,7 @@ namespace Manager
             district.County = null;
             
             districtManager.ClearCountyBorders(district);
-            foreach (var neighbour in districtManager.CalculateNeighbours(district.Position))
+            foreach (var neighbour in districtManager.GetAllNeighbours(district.Position))
             {
                 var neighbourDist = districtManager.GetDistrict(neighbour);
                 districtManager.ClearCountyBorders(neighbourDist);

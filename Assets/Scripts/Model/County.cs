@@ -12,6 +12,8 @@ namespace Model
     /// </summary>
     public class County
     {
+        private static int _instanceCounter;
+        
         [NotNull] [ItemNotNull]
         public List<District> Districts { get; } = new();
 
@@ -20,10 +22,11 @@ namespace Model
         public int Size => Districts.Count;
 
         public readonly int Id;
-
-        public County(int id)
+        
+        public County()
         {
-            Id = id;
+            Id = _instanceCounter;
+            _instanceCounter++;
         }
     }
 }

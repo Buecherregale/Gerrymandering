@@ -13,6 +13,8 @@ namespace Model
     /// </summary>
     public class District
     {
+        private static int _instanceCounter;
+        
         [NotNull]
         public readonly DistrictTile Tile;
         
@@ -23,11 +25,12 @@ namespace Model
         public Faction Faction => Tile.Faction;
         public Vector3Int Position { get; private set; }
         
-        public District([NotNull] DistrictTile tile, Vector3Int pos, int id)
+        public District([NotNull] DistrictTile tile, Vector3Int pos)
         {
             Tile = tile;
             Position = pos;
-            Id = id;
+            Id = _instanceCounter;
+            _instanceCounter++;
         }
     }
 }

@@ -111,7 +111,7 @@ namespace Manager
         {
             if (district.County == null)
                 return;
-            
+            Debug.Log("Drawing County Borders for District " + district.Position + " and county " + district.County);
             GetAllNeighbours(district.Position)
                 .Select(GetDistrict)
                 .Where(neighbour => district.County != neighbour.County)
@@ -153,7 +153,7 @@ namespace Manager
                     
                     if (tile == null) continue;
                     
-                    _districts.Add(tileCellPos, new District(tile, tileCellPos, 0));
+                    _districts.Add(tileCellPos, new District(tile, tileCellPos));
                 }
             }
         }

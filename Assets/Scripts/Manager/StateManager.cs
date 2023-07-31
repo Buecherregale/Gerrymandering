@@ -18,7 +18,7 @@ namespace Manager
         [SerializeField] private int maxDistrictSize = 3;
 
         [NotNull]
-        private readonly State _currentState = new (0);
+        private readonly State _currentState = new ();
 
         private County _currentCounty;
         private bool _drawingCounty;
@@ -104,7 +104,7 @@ namespace Manager
             }
             // draw new county
             _drawingCounty = true;
-            _currentCounty = new County(0);
+            _currentCounty = new County();
 
             if (!countyManager.AddDistrict(_currentCounty, district)) return;
             AddCounty(_currentState, _currentCounty);
