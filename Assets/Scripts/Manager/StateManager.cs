@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using JetBrains.Annotations;
 using Model;
 using Unity;
@@ -70,7 +71,12 @@ namespace Manager
                 countyVotes[(int) county.Winning]++;
             }
 
-            return (Faction) GerrymanderingUtil.MaxIndex(countyVotes);
+            var maxInd = GerrymanderingUtil.MaxIndex(countyVotes);
+            
+            if (countyVotes.Count(x => x == countyVotes[maxInd]) >= 2)
+                return Faction.Neutral;
+            
+            return (Faction) maxInd;
         }
 
         #region Event Functions

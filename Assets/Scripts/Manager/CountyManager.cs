@@ -103,10 +103,12 @@ namespace Manager
                 votes[(int) dist.Faction]++;
             }
 
-            if (votes.Where(x => x != 0).GroupBy(x => x).Any(g => g.Count() >= 2))
+            var maxInd = GerrymanderingUtil.MaxIndex(votes);
+            
+            if (votes.Count(x => x == votes[maxInd]) >= 2)
                 return Faction.Neutral;
             
-            return (Faction) GerrymanderingUtil.MaxIndex(votes);
+            return (Faction) maxInd;
         }
 
         /// <summary>
