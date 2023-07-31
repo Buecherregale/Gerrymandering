@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 using Model;
 using Unity;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Util;
 
 namespace Manager
@@ -130,8 +129,6 @@ namespace Manager
         {
             if (!_drawingCounty) return;
 
-            Debug.Log(_currentCounty.Size);
-            
             if (_currentCounty.Size < 2 || _currentCounty.Size > maxCountySize)
             {
                 countyManager.Clear(_currentCounty);

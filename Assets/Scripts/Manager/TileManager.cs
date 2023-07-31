@@ -18,18 +18,22 @@ namespace Manager
         internal Tilemap[] borderMaps = new Tilemap[8];
 
         [SerializeField] [Tooltip("8 Grey Tiles, one for every direction with diagonals")] 
-        internal Tile[] borderTilesNeutral = new Tile[8];
+        private Tile[] borderTilesNeutral = new Tile[8];
         [SerializeField] [Tooltip("8 Red Tiles, one for every direction with diagonals")] 
-        internal Tile[] borderTilesRepublicans = new Tile[8];
+        private Tile[] borderTilesRepublicans = new Tile[8];
         [SerializeField] [Tooltip("8 Blue Tiles, one for every direction with diagonals")] 
-        internal Tile[] borderTilesDemocrats = new Tile[8];
+        private Tile[] borderTilesDemocrats = new Tile[8];
         [SerializeField] [Tooltip("Tile to mark the district in winning color")]
         internal Tile markTile;
-        
-        /// <summary>
-        /// always call this for validation as child class
-        /// </summary>
-        internal void OnValidate()
+
+        public Tile[][] BorderTilesByParty { get; private set; }
+
+        private void Awake()
+        {
+            BorderTilesByParty = new[] { borderTilesNeutral, borderTilesDemocrats, borderTilesRepublicans };
+        }
+
+        private void OnValidate()
         {
             if (districtMap == null) throw new ArgumentException();
             if (markMap == null) throw new ArgumentException();
