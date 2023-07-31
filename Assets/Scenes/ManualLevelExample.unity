@@ -387,7 +387,7 @@ MonoBehaviour:
   tileManager: {fileID: 1711746365}
   countyManager: {fileID: 669723568}
   districtManager: {fileID: 726757796}
-  maxDistrictSize: 3
+  maxCountySize: 3
 --- !u!4 &488370604
 Transform:
   m_ObjectHideFlags: 0
@@ -434,6 +434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileManager: {fileID: 1711746365}
   districtManager: {fileID: 726757796}
+  stateManager: {fileID: 488370603}
 --- !u!4 &669723569
 Transform:
   m_ObjectHideFlags: 0
@@ -1678,7 +1679,7 @@ MonoBehaviour:
   - {fileID: 1446947554}
   - {fileID: 1506743067}
   - {fileID: 2102415795}
-  borderTiles:
+  borderTilesNeutral:
   - {fileID: 11400000, guid: 90cb3b2264121a443b80bb51d6f3aeb6, type: 2}
   - {fileID: 11400000, guid: 776631749768154449f87e06b87a1a82, type: 2}
   - {fileID: 11400000, guid: 04c2103c4dc73834bacb175698c79fb0, type: 2}
@@ -1687,6 +1688,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8cce98221b211984c9dac3ce705c2ea2, type: 2}
   - {fileID: 11400000, guid: 599686f9963472f41acb35da23b2ed9c, type: 2}
   - {fileID: 11400000, guid: ca9b61989840c7d42b238c87727adc80, type: 2}
+  borderTilesRepublicans:
+  - {fileID: 11400000, guid: e5a83d15f28f47146b841aa623785d52, type: 2}
+  - {fileID: 11400000, guid: 95e4967639e1ab94789b5d02e3fe6c7a, type: 2}
+  - {fileID: 11400000, guid: bdbddfbddc0b79a40bd576f068f7d7b0, type: 2}
+  - {fileID: 11400000, guid: db33f134329e71d46afd0480d3bc4774, type: 2}
+  - {fileID: 11400000, guid: e80435c976bc9554eb19986e147c86b0, type: 2}
+  - {fileID: 11400000, guid: 2d258ce64d6ffc148b5a8e349257e167, type: 2}
+  - {fileID: 11400000, guid: 8eb38d1b54fa3684babc6ae889524054, type: 2}
+  - {fileID: 11400000, guid: 9a2633bbb0eb01f49b7d636f29bf4c68, type: 2}
+  borderTilesDemocrats:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   markTile: {fileID: 11400000, guid: a7c44f5436cd4fc4e86aa5d740ede725, type: 2}
 --- !u!4 &1711746366
 Transform:

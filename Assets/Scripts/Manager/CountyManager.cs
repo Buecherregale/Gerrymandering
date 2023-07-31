@@ -15,6 +15,7 @@ namespace Manager
     {
         [SerializeField] private TileManager tileManager;
         [SerializeField] private DistrictManager districtManager;
+        [SerializeField] private StateManager stateManager;
 
         /// <summary>
         /// adds the district to the county
@@ -33,12 +34,20 @@ namespace Manager
             district.County = county;
             county.Winning = CalculateWinning(county);
             
-            districtManager.DrawCountyBorder(district);
+            districtManager.DrawCountyBorder(district, county.Winning);
             foreach (var neighbour in districtManager.GetAllNeighbours(district.Position))
             {
+                if (!(county.Districts.Contains(districtManager.GetDistrict(neighbour)))) continue;
                 var neighbourDist = districtManager.GetDistrict(neighbour);
                 districtManager.ClearCountyBorders(neighbourDist);
-                districtManager.DrawCountyBorder(neighbourDist);
+                districtManager.DrawCountyBorder(neighbourDist, county.Winning);
+            }
+
+            if (county.Districts.Count == stateManager.MaxCountySize) {
+                Debug.Log("showing county borders");
+                foreach (var tmpdistricts in county.Districts) {
+                    districtManager.DrawCountyBorder(tmpdistricts, county.Winning);
+                }
             }
             
             return true;
@@ -62,7 +71,7 @@ namespace Manager
             {
                 var neighbourDist = districtManager.GetDistrict(neighbour);
                 districtManager.ClearCountyBorders(neighbourDist);
-                districtManager.DrawCountyBorder(neighbourDist);
+                districtManager.DrawCountyBorder(neighbourDist, Faction.Neutral);
             }
 
             return true;

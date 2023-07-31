@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Model;
 using Unity;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Util;
 
 namespace Manager
@@ -16,14 +17,15 @@ namespace Manager
         [SerializeField] private CountyManager countyManager;
         [SerializeField] private DistrictManager districtManager;
 
-        [SerializeField] private int maxDistrictSize = 3;
+        [SerializeField] private int maxCountySize = 3;
+        public int MaxCountySize => maxCountySize;
 
         [NotNull]
         private readonly State _currentState = new ();
 
         private County _currentCounty;
         private bool _drawingCounty;
-        
+
         /// <summary>
         /// adds a county to the state
         /// </summary>
@@ -130,7 +132,7 @@ namespace Manager
 
             Debug.Log(_currentCounty.Size);
             
-            if (_currentCounty.Size < 2 || _currentCounty.Size > maxDistrictSize)
+            if (_currentCounty.Size < 2 || _currentCounty.Size > maxCountySize)
             {
                 countyManager.Clear(_currentCounty);
                 RemoveCounty(_currentState, _currentCounty);
