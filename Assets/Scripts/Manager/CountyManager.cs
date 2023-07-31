@@ -11,10 +11,10 @@ namespace Manager
     /// manages <see cref="County"/>.
     /// TODO: coloring and borders of counties
     /// </summary>
-    public class CountyManager: AbstractManager
+    public class CountyManager: MonoBehaviour
     {
-        [SerializeField] 
-        private DistrictManager districtManager;
+        [SerializeField] private TileManager tileManager;
+        [SerializeField] private DistrictManager districtManager;
 
         /// <summary>
         /// adds the district to the county

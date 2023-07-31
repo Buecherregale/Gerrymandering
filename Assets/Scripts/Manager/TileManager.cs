@@ -8,24 +8,24 @@ namespace Manager
     /// provides util for all managers
     /// access to all tilemaps
     /// </summary>
-    public class AbstractManager: MonoBehaviour
+    public class TileManager: MonoBehaviour
     {
         [SerializeField] [Tooltip("Map consisting of DistrictTiles representing the votes")]
-        protected Tilemap districtMap;
+        internal Tilemap districtMap;
         [SerializeField] [Tooltip("Map for the mark tiles")] 
-        protected Tilemap markMap;
+        internal Tilemap markMap;
         [SerializeField]  [Tooltip("8 Maps, one for every direction with diagonals")] 
-        protected Tilemap[] borderMaps = new Tilemap[8];
+        internal Tilemap[] borderMaps = new Tilemap[8];
 
         [SerializeField] [Tooltip("8 Tiles, one for every direction with diagonals")] 
-        protected Tile[] borderTiles = new Tile[8];
+        internal Tile[] borderTiles = new Tile[8];
         [SerializeField] [Tooltip("Tile to mark the district in winning color")]
-        protected Tile markTile;
+        internal Tile markTile;
         
         /// <summary>
         /// always call this for validation as child class
         /// </summary>
-        protected void OnValidate()
+        internal void OnValidate()
         {
             if (districtMap == null) throw new ArgumentException();
             if (markMap == null) throw new ArgumentException();

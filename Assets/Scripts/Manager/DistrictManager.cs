@@ -14,8 +14,10 @@ namespace Manager
     /// manages the <see cref="District"/>.
     /// Able to get all DistrictTiles based on position.
     /// </summary>
-    public class DistrictManager : AbstractManager
+    public class DistrictManager: MonoBehaviour
     {
+        [SerializeField] private TileManager tileManager;
+        
         [NotNull] private readonly Dictionary<Vector3Int, District> _districts = new();
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace Manager
             return from offset in neighbourOffsets
                 select pos + offset
                 into neighbourPosition
-                where districtMap.HasTile(neighbourPosition)
+                where tileManager.districtMap.HasTile(neighbourPosition)
                 select neighbourPosition;
         }
 
@@ -70,11 +72,11 @@ namespace Manager
             return from offset in neighbourOffsets
                 select pos + offset
                 into neighbourPosition
-                where districtMap.HasTile(neighbourPosition)
+                where tileManager.districtMap.HasTile(neighbourPosition)
                 select neighbourPosition;
         }
 
-        /// <param name="pos">cell position on <see cref="AbstractManager.districtMap"/></param>
+        /// <param name="pos">cell position on <see cref="TileManager.districtMap"/></param>
         /// <returns>the district at the position</returns>
         /// <exception cref="ArgumentException">if there is no district</exception>
         [NotNull]
@@ -117,7 +119,7 @@ namespace Manager
                 .Select(neighbour => GerrymanderingUtil.VecToDiagDir(neighbour.Position, district.Position))
                 .ToList()
                 .ForEach(direction =>
-                    borderMaps[(int)direction].SetTile(district.Position, borderTiles[(int)direction]));
+                    tileManager.borderMaps[(int)direction].SetTile(district.Position, tileManager.borderTiles[(int)direction]));
         }
 
         /// <summary>
@@ -126,7 +128,7 @@ namespace Manager
         /// <param name="district">a district to clear the tiles from</param>
         public void ClearCountyBorders([NotNull] District district)
         {
-            foreach (var borderMap in borderMaps)
+            foreach (var borderMap in tileManager.borderMaps)
             {
                 if (borderMap.HasTile(district.Position)) borderMap.SetTile(district.Position, null);
             }
@@ -136,19 +138,19 @@ namespace Manager
         /// needs to be the first thing called
         /// awake or start?
         /// enters the information for every tile
-        /// tiles in <see cref="AbstractManager.districtMap"/> have to be <see cref="DistrictTile">Districts</see>
+        /// tiles in <see cref="TileManager.districtMap"/> have to be <see cref="DistrictTile">Districts</see>
         /// </summary>
         private void Start()
         {
             // load all districts of district map 
-            var bounds = districtMap.cellBounds;
+            var bounds = tileManager.districtMap.cellBounds;
 
             for (var x = bounds.xMin; x < bounds.xMax; x++)
             {
                 for (var y = bounds.yMin; y < bounds.yMax; y++)
                 {
                     var tileCellPos = new Vector3Int(x, y, 0);
-                    var tile = districtMap.GetTile<DistrictTile>(tileCellPos);
+                    var tile = tileManager.districtMap.GetTile<DistrictTile>(tileCellPos);
                     
                     if (tile == null) continue;
                     

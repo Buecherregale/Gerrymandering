@@ -10,8 +10,9 @@ namespace Manager
     /// <summary>
     /// manages <see cref="State"/>
     /// </summary>
-    public class StateManager: AbstractManager
+    public class StateManager: MonoBehaviour
     {
+        [SerializeField] private TileManager tileManager;
         [SerializeField] private CountyManager countyManager;
         [SerializeField] private DistrictManager districtManager;
 
@@ -91,7 +92,7 @@ namespace Manager
         {
             if (_drawingCounty) return;
 
-            var tilePos = districtMap.WorldToCell(pos);
+            var tilePos = tileManager.districtMap.WorldToCell(pos);
 
             if (!districtManager.TryGetDistrict(tilePos, out var district)) return;
 
@@ -114,8 +115,8 @@ namespace Manager
         {
             if (!_drawingCounty) return;
 
-            var tilePos = districtMap.WorldToCell(pos);
-            if (!districtMap.HasTile(tilePos)) return;
+            var tilePos = tileManager.districtMap.WorldToCell(pos);
+            if (!tileManager.districtMap.HasTile(tilePos)) return;
             var district = districtManager.GetDistrict(tilePos);
 
             if (district.County != null) return;

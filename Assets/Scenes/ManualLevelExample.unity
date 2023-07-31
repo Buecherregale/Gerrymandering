@@ -384,27 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7d4be0799f4266b3f579d2b32b2265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  districtMap: {fileID: 1273525665}
-  markMap: {fileID: 29511170}
-  borderMaps:
-  - {fileID: 1490446033}
-  - {fileID: 1886973493}
-  - {fileID: 2032201014}
-  - {fileID: 1307596884}
-  - {fileID: 1805068033}
-  - {fileID: 1446947554}
-  - {fileID: 1506743067}
-  - {fileID: 2102415795}
-  borderTiles:
-  - {fileID: 11400000, guid: 90cb3b2264121a443b80bb51d6f3aeb6, type: 2}
-  - {fileID: 11400000, guid: 776631749768154449f87e06b87a1a82, type: 2}
-  - {fileID: 11400000, guid: 04c2103c4dc73834bacb175698c79fb0, type: 2}
-  - {fileID: 11400000, guid: 00556ac0d23ad524fab4f1a31fba2f75, type: 2}
-  - {fileID: 11400000, guid: 7abefefee8d41d246b7e434601742f8f, type: 2}
-  - {fileID: 11400000, guid: 8cce98221b211984c9dac3ce705c2ea2, type: 2}
-  - {fileID: 11400000, guid: 599686f9963472f41acb35da23b2ed9c, type: 2}
-  - {fileID: 11400000, guid: ca9b61989840c7d42b238c87727adc80, type: 2}
-  markTile: {fileID: 11400000, guid: a7c44f5436cd4fc4e86aa5d740ede725, type: 2}
+  tileManager: {fileID: 1711746365}
   countyManager: {fileID: 669723568}
   districtManager: {fileID: 726757796}
   maxDistrictSize: 3
@@ -452,27 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2da60e0f5e8404a9d5559889111628b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  districtMap: {fileID: 1273525665}
-  markMap: {fileID: 29511170}
-  borderMaps:
-  - {fileID: 1490446033}
-  - {fileID: 1886973493}
-  - {fileID: 2032201014}
-  - {fileID: 1307596884}
-  - {fileID: 1805068033}
-  - {fileID: 1446947554}
-  - {fileID: 1506743067}
-  - {fileID: 2102415795}
-  borderTiles:
-  - {fileID: 11400000, guid: 90cb3b2264121a443b80bb51d6f3aeb6, type: 2}
-  - {fileID: 11400000, guid: 776631749768154449f87e06b87a1a82, type: 2}
-  - {fileID: 11400000, guid: 04c2103c4dc73834bacb175698c79fb0, type: 2}
-  - {fileID: 11400000, guid: 00556ac0d23ad524fab4f1a31fba2f75, type: 2}
-  - {fileID: 11400000, guid: 7abefefee8d41d246b7e434601742f8f, type: 2}
-  - {fileID: 11400000, guid: 8cce98221b211984c9dac3ce705c2ea2, type: 2}
-  - {fileID: 11400000, guid: 599686f9963472f41acb35da23b2ed9c, type: 2}
-  - {fileID: 11400000, guid: ca9b61989840c7d42b238c87727adc80, type: 2}
-  markTile: {fileID: 11400000, guid: a7c44f5436cd4fc4e86aa5d740ede725, type: 2}
+  tileManager: {fileID: 1711746365}
   districtManager: {fileID: 726757796}
 --- !u!4 &669723569
 Transform:
@@ -518,27 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf4c29425734429a6d953c8ecd87b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  districtMap: {fileID: 1273525665}
-  markMap: {fileID: 29511170}
-  borderMaps:
-  - {fileID: 1490446033}
-  - {fileID: 1886973493}
-  - {fileID: 2032201014}
-  - {fileID: 1307596884}
-  - {fileID: 1805068033}
-  - {fileID: 1446947554}
-  - {fileID: 1506743067}
-  - {fileID: 2102415795}
-  borderTiles:
-  - {fileID: 11400000, guid: 90cb3b2264121a443b80bb51d6f3aeb6, type: 2}
-  - {fileID: 11400000, guid: 776631749768154449f87e06b87a1a82, type: 2}
-  - {fileID: 11400000, guid: 04c2103c4dc73834bacb175698c79fb0, type: 2}
-  - {fileID: 11400000, guid: 00556ac0d23ad524fab4f1a31fba2f75, type: 2}
-  - {fileID: 11400000, guid: 7abefefee8d41d246b7e434601742f8f, type: 2}
-  - {fileID: 11400000, guid: 8cce98221b211984c9dac3ce705c2ea2, type: 2}
-  - {fileID: 11400000, guid: 599686f9963472f41acb35da23b2ed9c, type: 2}
-  - {fileID: 11400000, guid: ca9b61989840c7d42b238c87727adc80, type: 2}
-  markTile: {fileID: 11400000, guid: a7c44f5436cd4fc4e86aa5d740ede725, type: 2}
+  tileManager: {fileID: 1711746365}
 --- !u!4 &726757797
 Transform:
   m_ObjectHideFlags: 0
@@ -1698,6 +1638,71 @@ Transform:
   - {fileID: 219135290}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1711746364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1711746366}
+  - component: {fileID: 1711746365}
+  m_Layer: 0
+  m_Name: TileManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1711746365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711746364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8dd175167dc4db4a8a97be51112de83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  districtMap: {fileID: 1273525665}
+  markMap: {fileID: 29511170}
+  borderMaps:
+  - {fileID: 1490446033}
+  - {fileID: 1886973493}
+  - {fileID: 2032201014}
+  - {fileID: 1307596884}
+  - {fileID: 1805068033}
+  - {fileID: 1446947554}
+  - {fileID: 1506743067}
+  - {fileID: 2102415795}
+  borderTiles:
+  - {fileID: 11400000, guid: 90cb3b2264121a443b80bb51d6f3aeb6, type: 2}
+  - {fileID: 11400000, guid: 776631749768154449f87e06b87a1a82, type: 2}
+  - {fileID: 11400000, guid: 04c2103c4dc73834bacb175698c79fb0, type: 2}
+  - {fileID: 11400000, guid: 00556ac0d23ad524fab4f1a31fba2f75, type: 2}
+  - {fileID: 11400000, guid: 7abefefee8d41d246b7e434601742f8f, type: 2}
+  - {fileID: 11400000, guid: 8cce98221b211984c9dac3ce705c2ea2, type: 2}
+  - {fileID: 11400000, guid: 599686f9963472f41acb35da23b2ed9c, type: 2}
+  - {fileID: 11400000, guid: ca9b61989840c7d42b238c87727adc80, type: 2}
+  markTile: {fileID: 11400000, guid: a7c44f5436cd4fc4e86aa5d740ede725, type: 2}
+--- !u!4 &1711746366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711746364}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1739404718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2387,6 +2392,7 @@ SceneRoots:
   - {fileID: 1242178559}
   - {fileID: 1739404719}
   - {fileID: 421141197}
+  - {fileID: 1711746366}
   - {fileID: 488370604}
   - {fileID: 669723569}
   - {fileID: 726757797}
