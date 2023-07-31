@@ -1698,14 +1698,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8eb38d1b54fa3684babc6ae889524054, type: 2}
   - {fileID: 11400000, guid: 9a2633bbb0eb01f49b7d636f29bf4c68, type: 2}
   borderTilesDemocrats:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: eaba0ab519e4add4d8cc1f46ab83427d, type: 2}
+  - {fileID: 11400000, guid: 523b2bb1598f18b489b6af0e363f49c2, type: 2}
+  - {fileID: 11400000, guid: c208824d312bba54b9d2814bbb13c8f4, type: 2}
+  - {fileID: 11400000, guid: da9b8f6117f52dc448215217ddca4dab, type: 2}
+  - {fileID: 11400000, guid: 716029ba69cbffb4894d17dc6b2710e1, type: 2}
+  - {fileID: 11400000, guid: 1dc57829750384c4eaadd8122c7d8b38, type: 2}
+  - {fileID: 11400000, guid: 61c0b5713e83e5847b2af855b312f7f0, type: 2}
+  - {fileID: 11400000, guid: b1530cfdbe87bba449a99f7fedceafbc, type: 2}
   markTile: {fileID: 11400000, guid: a7c44f5436cd4fc4e86aa5d740ede725, type: 2}
 --- !u!4 &1711746366
 Transform:

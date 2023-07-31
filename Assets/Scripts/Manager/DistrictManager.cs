@@ -127,7 +127,7 @@ namespace Manager
                             tileManager.borderMaps[(int)direction].SetTile(district.Position, tileManager.borderTilesRepublicans[(int)direction]);
                             break;
                         case Faction.Democrats:
-                            tileManager.borderMaps[(int)direction].SetTile(district.Position, tileManager.borderTilesNeutral[(int)direction]);
+                            tileManager.borderMaps[(int)direction].SetTile(district.Position, tileManager.borderTilesDemocrats[(int)direction]);
                             break;
                     }
                     
