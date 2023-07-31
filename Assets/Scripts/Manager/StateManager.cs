@@ -1,6 +1,8 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Model;
+using Unity;
+using UnityEngine;
 using Util;
 
 namespace Manager
@@ -8,8 +10,17 @@ namespace Manager
     /// <summary>
     /// manages <see cref="State"/>
     /// </summary>
-    public class StateManager
+    public class StateManager: AbstractManager
     {
+        [SerializeField] private CountyManager countyManager;
+        [SerializeField] private DistrictManager districtManager;
+
+        [NotNull]
+        private readonly State _currentState = new (0);
+
+        private County _currentCounty;
+        private bool _drawingCounty;
+        
         /// <summary>
         /// adds a county to the state
         /// </summary>
@@ -42,11 +53,11 @@ namespace Manager
         }
         
         /// <summary>
-        /// pretty much same impl as <see cref="County.CalculateDominant()">County.CalculateDominant()</see> 
+        /// pretty much same impl as <see cref="CountyManager.CalculateWinning">County.CalculateDominant()</see> 
         /// </summary>
         /// <returns>the currently leading <see cref="Faction"/></returns>
         [Pure]
-        private Faction CalculateDominant([NotNull] State state)
+        private static Faction CalculateDominant([NotNull] State state)
         {
             var countyVotes = new int[Enum.GetValues(typeof(Faction)).Length];
             
@@ -57,5 +68,75 @@ namespace Manager
 
             return (Faction) GerrymanderingUtil.MaxIndex(countyVotes);
         }
+
+        #region Event Functions
+
+        private void OnEnable()
+        {
+            InputEventSystem.OnInpBegin += OnInpBegin;
+            InputEventSystem.OnInpDrag += OnInpDrag;
+            InputEventSystem.OnInpEnd += OnInpEnd;
+        }
+
+        private void OnDisable()
+        {
+            InputEventSystem.OnInpBegin -= OnInpBegin;
+            InputEventSystem.OnInpDrag -= OnInpDrag;
+            InputEventSystem.OnInpEnd -= OnInpEnd;
+        }
+
+        private void OnInpBegin(Vector3 pos)
+        {
+            if (_drawingCounty) return;
+
+            var tilePos = districtMap.WorldToCell(pos);
+
+            if (!districtManager.TryGetDistrict(tilePos, out var district)) return;
+
+            if (district!.County != null)
+            {
+                // delete county
+                countyManager.Clear(district.County);
+                RemoveCounty(_currentState, district.County);
+                return;
+            }
+            // draw new county
+            _drawingCounty = true;
+            _currentCounty = new County(0);
+
+            if (!countyManager.AddDistrict(_currentCounty, district)) return;
+            AddCounty(_currentState, _currentCounty);
+        }
+        
+        private void OnInpDrag(Vector3 pos)
+        {
+            if (!_drawingCounty) return;
+
+            var tilePos = districtMap.WorldToCell(pos);
+            if (!districtMap.HasTile(tilePos)) return;
+            var district = districtManager.GetDistrict(tilePos);
+
+            if (district.County == null) return;
+            // add to county
+            countyManager.AddDistrict(_currentCounty, district);
+        } 
+        
+        private void OnInpEnd(Vector3 pos)
+        {
+            if (!_drawingCounty) return;
+
+            if (_currentCounty.Size < 2)
+            {
+                countyManager.Clear(_currentCounty);
+                RemoveCounty(_currentState, _currentCounty);
+            }
+
+            Debug.Log(_currentCounty.Size);
+            
+            _drawingCounty = false;
+            _currentCounty = null;
+        }
+
+        #endregion
     }
 }

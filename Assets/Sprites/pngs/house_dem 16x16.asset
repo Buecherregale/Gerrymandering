@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e480bf940c9f1794cba2a9c17f8e2445, type: 3}
+  m_Script: {fileID: 11500000, guid: e4a21380ae9048869bc6f67da60dda64, type: 3}
   m_Name: house_dem 16x16
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: e56eca66f350280448c68882912aa3fb, type: 3}
@@ -32,6 +32,6 @@ MonoBehaviour:
     e32: 0
     e33: 1
   m_InstancedGameObject: {fileID: 0}
-  m_Flags: 1
+  m_Flags: 0
   m_ColliderType: 1
-  tilemap: {fileID: 0}
+  faction: 1

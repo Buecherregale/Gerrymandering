@@ -49,6 +49,24 @@ namespace Manager
             if (!_districts.ContainsKey(pos)) throw new ArgumentException("no district on position: " + pos);
             return _districts[pos];
         }
+
+        /// <summary>
+        /// tries to get the district at the position.
+        /// if this returns true, district is guaranteed to not be null
+        /// </summary>
+        /// <param name="pos">position of the district</param>
+        /// <param name="district">district at the position or NULL</param>
+        /// <returns>if the district exists</returns>
+        public bool TryGetDistrict(Vector3Int pos, [CanBeNull] out District district)
+        {
+            if (_districts.TryGetValue(pos, out var district1))
+            {
+                district = district1;
+                return true;
+            }
+            district = null;
+            return false;
+        }
         
         /// <summary>
         /// needs to be the first thing called
@@ -69,7 +87,8 @@ namespace Manager
                     var tileCellPos = new Vector3Int(x, y, 0);
                     var tile = districtMap.GetTile<DistrictTile>(tileCellPos);
 
-                    if (tile == null) throw new ArgumentException("tile " + tile + " is not a District. Position: " + tileCellPos);
+                    // if (tile == null) throw new ArgumentException("tile " + tile + " is not a District. Position: " + districtMap.CellToWorld(tileCellPos));
+                    if (tile == null) continue;
                     
                     _districts.Add(tileCellPos, new District(tile, tileCellPos, 0));
                 }

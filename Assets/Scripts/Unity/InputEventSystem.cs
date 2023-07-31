@@ -25,7 +25,7 @@ namespace Unity
         
         private void Update()
         {
-            MouseInp();
+            MouseInp(); // replaced with OnMouseDrag ??
             TouchInp();
         }
 
@@ -38,10 +38,9 @@ namespace Unity
             if (Input.GetMouseButtonDown(0))
             {
                 OnInpBegin?.Invoke(ConvertPos(Input.mousePosition));
-                _mouseDrag = true;
             }
 
-            if (_mouseDrag)
+            if (Input.GetMouseButton(0))
             {
                 OnInpDrag?.Invoke(ConvertPos(Input.mousePosition));
             }
@@ -49,7 +48,6 @@ namespace Unity
             if (Input.GetMouseButtonUp(0))
             {
                 OnInpEnd?.Invoke(ConvertPos(Input.mousePosition));
-                _mouseDrag = false;
             }
         }
 
