@@ -22,10 +22,10 @@ Gerrymandering Simulator is an educational game that aims to raise awareness abo
    git clone https://github.com/your-username/gerrymandering-simulator.git
 
 2. Open with Unity Hub
-3. Build for Android
+3. Build for Android or Windows
 
 ### Further Documentation
 
-Using Obsidian with plantUML you can view [class diagrams](obsidian/Gerrymandering/Class%20Diagramm.md)
-
-### [Features](obsidian/Gerrymandering/Feautures.md)
+Using Obsidian with plantUML you can view [class diagrams](obsidian/Gerrymandering/Class%20Diagramms) <br>
+Features can be found [here](obsidian/Gerrymandering/Features.md). <br>
+Similar Game: [GameTheory](http://gametheorytest.com/gerry/)
