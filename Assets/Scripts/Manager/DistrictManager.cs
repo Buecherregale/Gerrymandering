@@ -116,7 +116,7 @@ namespace Manager
             GetAllNeighbours(district.Position)
                 .Select(GetDistrict)
                 .Where(neighbour => district.County != neighbour.County)
-                .Select(neighbour => GerrymanderingUtil.VecToDiagDir(neighbour.Position, district.Position))
+                .Select(neighbour => GerrymanderingUtil.VecToDir(neighbour.Position, district.Position))
                 .ToList()
                 .ForEach(direction => 
                     tileManager.borderMaps[(int) direction]
