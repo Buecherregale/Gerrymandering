@@ -2,8 +2,9 @@
 ```plantuml
 
 enum Faction {
- Republicans,
- Democrats
+ Neutral,
+ Democrats,
+ Republicans
 }
 
 enum Neighbours {
@@ -22,27 +23,36 @@ class VisualTile {
 }
 
 class District {
+	_instancecounter : int
+	id : int
 	county : County
 	faction : Faction 
-	marked : boolean
-	Neighbours() : District[] 
+	Position : Vector3Int
+	District(tile : DistrictTile, pos : Vector3Int) : District
 }
 
 class County {
 	Districts : District[]
-	id : int
-	Winning : Faction 
-	AddDistrict(district : District) : boolean
-	RemoveDistrict(district : District) : boolean
-	- CalculateDominant() : Faction
+	_instancecounter : int
+	Winning : Faction
+	Size : int
+	id : int 
+	County() : County
 }
 
 class State {
+	_instancecounter : int
 	Counties : County[]
 	Winning : Faction
-	AddCounty(county : County): boolean
-	RemoveCounty(county : County): boolean
-	- CalculateDominant() : Faction
+	Size : int
+	id : int
+	State() : State
+}
+
+class DistrictManager {
+	tilemanager : Tilemanager
+	_districts : Dictionary<Vector3Int, District>
+	CalculateNeighbours(pos : Vector3Int) : Vector3Int[]
 }
 
 District <|-- GerrymanderingTile
