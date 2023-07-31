@@ -20,6 +20,10 @@ namespace Manager
         
         [NotNull] private readonly Dictionary<Vector3Int, District> _districts = new();
 
+        public int GetDistrictCount() {
+            return _districts.Count;
+        }
+
         /// <summary>
         /// calculates all neighbouring districts
         /// does not use diagonal neighbours
