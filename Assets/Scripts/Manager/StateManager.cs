@@ -116,7 +116,7 @@ namespace Manager
             if (!districtMap.HasTile(tilePos)) return;
             var district = districtManager.GetDistrict(tilePos);
 
-            if (district.County == null) return;
+            if (district.County != null) return;
             // add to county
             countyManager.AddDistrict(_currentCounty, district);
         } 

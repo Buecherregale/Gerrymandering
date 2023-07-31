@@ -28,14 +28,13 @@ namespace Manager
         /// <returns>if successful</returns>
         public bool AddDistrict([NotNull] County county, [NotNull] District district)
         {
-            Debug.Log("Aokjsdoajdaodjsoajdoajd");
             if (county.Districts.Contains(district)) return false;
             if (!CanAddToCounty(county, district)) return false;
 
             county.Districts.Add(district);
             district.County = county;
             county.Winning = CalculateWinning(county);
-            Debug.Log("Okjasdojadoasjhdosajdosajdoajdsosajodsjaodfasogeswogjeoj");
+            
             return true;
         }
 
