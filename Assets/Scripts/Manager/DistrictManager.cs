@@ -141,7 +141,7 @@ namespace Manager
         /// enters the information for every tile
         /// tiles in <see cref="TileManager.districtMap"/> have to be <see cref="DistrictTile">Districts</see>
         /// </summary>
-        private void Start()
+        private void Awake()
         {
             // load all districts of district map 
             var bounds = tileManager.districtMap.cellBounds;
