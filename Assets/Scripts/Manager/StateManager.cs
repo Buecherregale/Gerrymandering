@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Model;
 using TMPro;
 using Unity;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Util;
@@ -21,7 +23,11 @@ namespace Manager
         [SerializeField] private DistrictManager districtManager;
 
         [SerializeField] private int maxCountySize = 3;
+        [SerializeField] private int maxCountyAmount = 5;
+        
         public int MaxCountySize => maxCountySize;
+        public int MaxCountyAmount => maxCountyAmount;
+        public int CurrentCountyAmount => _currentState.Size;
 
         private int maxCounties;
         private int currentCountyCount;
@@ -29,6 +35,8 @@ namespace Manager
         [FormerlySerializedAs("text")] [SerializeField] 
         private TextMeshProUGUI uiText;
 
+        public UnityEvent countyAmountUpdated = new();
+        
         [NotNull]
         private readonly State _currentState = new ();
 
@@ -54,12 +62,9 @@ namespace Manager
         public bool AddCounty([NotNull] State state, [NotNull] County county)
         {
             if (state.Counties.Contains(county)) return false;
-
+            
             state.Counties.Add(county);
             state.Winning = CalculateDominant(state);
-            
-            currentCountyCount = state.Counties.Count;
-            
             return true;
         }
 
@@ -77,6 +82,22 @@ namespace Manager
             state.Counties.Remove(county);
             state.Winning = CalculateDominant(state);
             return true;
+        }
+
+        public Dictionary<Faction, int> VotesByFaction()
+        {
+            var votes = new Dictionary<Faction, int>();
+            foreach (Faction faction in Enum.GetValues(typeof(Faction)))
+            {
+                votes.TryAdd(faction, 0);
+            }
+
+            foreach (var county in _currentState.Counties)
+            {
+                votes[county.Winning]++;
+            }
+
+            return votes;
         }
         
         /// <summary>
@@ -139,14 +160,16 @@ namespace Manager
                 // delete county
                 RemoveCounty(_currentState, district.County);
                 countyManager.Clear(district.County);
+                RemoveCounty(_currentState, district.County);                                                           // for some reason they have to be in that order
+                countyManager.Clear(district.County);
                 return;
             }
             
+            if (_currentState.Size == maxCountyAmount) return;
             // draw new county
             _drawingCounty = true;
             _currentCounty = new County();
 
-            if (!countyManager.AddDistrict(_currentCounty, district)) return;
             AddCounty(_currentState, _currentCounty);
         }
         
@@ -168,11 +191,13 @@ namespace Manager
             if (!_drawingCounty) return;
 
             if (_currentCounty.Size != maxCountySize)
+            
+            if (_currentCounty.Size < 2 || _currentCounty.Size > maxCountySize)
             {
                 countyManager.Clear(_currentCounty);
                 RemoveCounty(_currentState, _currentCounty);
             }
-
+            countyAmountUpdated.Invoke();
             _drawingCounty = false;
             _currentCounty = null;
             
