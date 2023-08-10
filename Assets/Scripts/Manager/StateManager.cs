@@ -151,7 +151,7 @@ namespace Manager
         {
             if (!_drawingCounty) return;
 
-            if (_currentCounty.Size < 2 || _currentCounty.Size > maxCountySize)
+            if (_currentCounty.Size != maxCountySize)
             {
                 countyManager.Clear(_currentCounty);
                 RemoveCounty(_currentState, _currentCounty);
