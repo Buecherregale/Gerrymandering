@@ -32,5 +32,9 @@ namespace Model
             Id = _instanceCounter;
             _instanceCounter++;
         }
+        ~District()
+        {
+            _instanceCounter--;
+        }
     }
 }
