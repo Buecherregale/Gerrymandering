@@ -122,8 +122,8 @@ namespace Manager
             if (district!.County != null)
             {
                 // delete county
-                countyManager.Clear(district.County);
                 RemoveCounty(_currentState, district.County);
+                countyManager.Clear(district.County);
                 return;
             }
             // draw new county
