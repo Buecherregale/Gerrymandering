@@ -162,6 +162,8 @@ namespace Manager
                 countyManager.Clear(district.County);
                 RemoveCounty(_currentState, district.County);                                                           // for some reason they have to be in that order
                 countyManager.Clear(district.County);
+                
+                countyAmountUpdated.Invoke();
                 return;
             }
             
@@ -205,6 +207,8 @@ namespace Manager
             if (currentCountyCount == maxCounties && _currentState.Winning == _factionToWin) {
                 uiText.text = "You took the " + _factionToWin + " to win the state";
             }
+            
+            countyAmountUpdated.Invoke();
         }
 
         #endregion
