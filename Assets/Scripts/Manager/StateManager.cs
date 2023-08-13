@@ -5,6 +5,7 @@ using Model;
 using TMPro;
 using Unity;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Util;
 
@@ -24,6 +25,9 @@ namespace Manager
 
         private int maxCounties;
         private int currentCountyCount;
+        
+        [FormerlySerializedAs("text")] [SerializeField] 
+        private TextMeshProUGUI uiText;
 
         [NotNull]
         private readonly State _currentState = new ();
@@ -31,9 +35,16 @@ namespace Manager
         private County _currentCounty;
         private bool _drawingCounty;
 
-        private Faction _factionToWin = Faction.Republicans;
-        [SerializeField] private TextMeshProUGUI text;
+        private Faction _factionToWin;
         
+        public void SetWinningFaction(Faction faction)
+        {
+            if (faction == Faction.Neutral) {
+                Debug.LogError("Faction.Neutral is not a valid faction to win");
+            }
+            _factionToWin = faction;
+        }
+
         /// <summary>
         /// adds a county to the state
         /// </summary>
@@ -90,9 +101,13 @@ namespace Manager
             return (Faction) maxInd;
         }
 
+        /// <summary>
+        /// set the max counties by dividing the district count by the max county size
+        /// set the text to the faction to win
+        /// </summary>
         private void Start() {
             maxCounties = districtManager.GetDistrictCount() / maxCountySize;
-            text.text = "take the " + _factionToWin + " to win";
+            uiText.text = "take the " + _factionToWin + " to win";
         }
 
         #region Event Functions
@@ -133,7 +148,6 @@ namespace Manager
 
             if (!countyManager.AddDistrict(_currentCounty, district)) return;
             AddCounty(_currentState, _currentCounty);
-            Debug.Log("begin drawing county");
         }
         
         private void OnInpDrag(Vector3 pos)
@@ -162,8 +176,9 @@ namespace Manager
             _drawingCounty = false;
             _currentCounty = null;
             
+            // check if won
             if (currentCountyCount == maxCounties && _currentState.Winning == _factionToWin) {
-                text.text = "You took the " + _factionToWin + " to win the state";
+                uiText.text = "You took the " + _factionToWin + " to win the state";
             }
         }
 

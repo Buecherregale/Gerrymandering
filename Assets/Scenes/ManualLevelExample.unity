@@ -522,7 +522,7 @@ MonoBehaviour:
   countyManager: {fileID: 669723568}
   districtManager: {fileID: 726757796}
   maxCountySize: 3
-  text: {fileID: 173688320}
+  uiText: {fileID: 173688320}
 --- !u!4 &488370604
 Transform:
   m_ObjectHideFlags: 0
@@ -1503,6 +1503,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 61c0b5713e83e5847b2af855b312f7f0, type: 2}
   - {fileID: 11400000, guid: b1530cfdbe87bba449a99f7fedceafbc, type: 2}
   markTile: {fileID: 11400000, guid: a7c44f5436cd4fc4e86aa5d740ede725, type: 2}
+  stateManager: {fileID: 488370603}
+  districtManager: {fileID: 726757796}
 --- !u!4 &1711746366
 Transform:
   m_ObjectHideFlags: 0

@@ -25,20 +25,37 @@ namespace Manager
         private Tile[] borderTilesDemocrats = new Tile[8];
         [SerializeField] [Tooltip("Tile to mark the district in winning color")]
         internal Tile markTile;
+        
+        [SerializeField] 
+        private StateManager stateManager;
+        [SerializeField]
+        private DistrictManager districtManager;
 
         public Tile[][] BorderTilesByParty { get; private set; }
 
+        
+        /// <summary>
+        /// When the Scene is Loaded the appropriate districts are loaded
+        /// The Districts are instantiated and all references are getting set
+        /// At Last the winning faction is set
+        /// </summary>
         private void Awake()
         {
             BorderTilesByParty = new[] { borderTilesNeutral, borderTilesDemocrats, borderTilesRepublicans };
             
-            GameObject districts = Resources.Load<GameObject>("Districts");
+            GameObject districts = Resources.Load<GameObject>("Level/1");
             if (districts == null) {
-                Debug.Log("Districts not found loaded");
+                Debug.LogError("Districts not found");
                 return;
             }
-            Instantiate(districts, GameObject.FindGameObjectWithTag("Grid").transform);
-            districtMap = districts.GetComponent<Tilemap>();
+            GameObject instantiatedDistricts = Instantiate(districts, GameObject.FindGameObjectWithTag("Grid").transform);
+            districtMap = instantiatedDistricts.GetComponent<Tilemap>();
+            
+            districtManager.LoadEveryTile();
+            
+            LevelData levelData = instantiatedDistricts.GetComponent<LevelData>();
+            stateManager.SetWinningFaction(levelData.Winning);
+            
         }
 
         private void Start()
