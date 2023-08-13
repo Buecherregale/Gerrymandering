@@ -1,6 +1,6 @@
 {
 	"nodes":[
-		{"type":"file","file":"Gerrymandering/Feautures.md","id":"5bbd2138c4815483","x":-180,"y":180,"width":400,"height":400},
+		{"type":"file","file":"Gerrymandering/Features.md","id":"5bbd2138c4815483","x":-180,"y":180,"width":400,"height":400},
 		{"type":"file","file":"Gerrymandering/Main Menu.md","id":"2583968be516bf26","x":-180,"y":700,"width":400,"height":400},
 		{"type":"file","file":"Gerrymandering/Level Visuals.md","id":"4156049fda1c0c15","x":-660,"y":700,"width":400,"height":400},
 		{"type":"file","file":"Gerrymandering/Gameplay.md","id":"af86f1deaf8b7c0d","x":-660,"y":1260,"width":400,"height":400},

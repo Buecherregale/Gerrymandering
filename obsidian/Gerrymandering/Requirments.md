@@ -1,2 +1,2 @@
 - [x] #todo Git Repo 
-- [x] #todo Unity Projects 2D Mobile ? [[Feautures]]
+- [x] #todo Unity Projects 2D Mobile ? [[Features]]
