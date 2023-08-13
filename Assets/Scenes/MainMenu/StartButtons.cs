@@ -20,12 +20,25 @@ public class StartButtons : MonoBehaviour {
     }
 
     public void StartStory() {
-        //throw new NotImplementedException();
-        SceneManager.LoadScene(0);
+        throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// When a difficulty is selected, save it to player prefs and load the game scene
+    /// </summary>
+    /// <param name="difficulty"></param>
+    /// <exception cref="NotImplementedException"></exception>
     public void StartDifficulty(Difficulty difficulty ) {
-        throw new NotImplementedException();
+        if (difficulty == Difficulty.Easy)
+        {
+            PlayerPrefs.SetString("difficulty", difficulty.ToString());
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(0);
+        }
+        else {
+            throw new NotImplementedException();
+        }
+        
     }
     
     [System.Serializable]

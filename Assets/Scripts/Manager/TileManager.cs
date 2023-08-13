@@ -42,8 +42,11 @@ namespace Manager
         private void Awake()
         {
             BorderTilesByParty = new[] { borderTilesNeutral, borderTilesDemocrats, borderTilesRepublicans };
-            
-            GameObject districts = Resources.Load<GameObject>("Level/1");
+
+            string levelName = "Level/" + PlayerPrefs.GetString("difficulty") + "/";
+            levelName += RandomNumberGenerator(1, 2).ToString();
+
+            GameObject districts = Resources.Load<GameObject>(levelName);
             if (districts == null) {
                 Debug.LogError("Districts not found");
                 return;
@@ -70,6 +73,25 @@ namespace Manager
             if (borderTilesDemocrats is not { Length: 8 }) throw new ArgumentException();
 
             if (markTile == null) throw new ArgumentException();
+        }
+
+        /// <summary>
+        /// returns a random number in a given interval.
+        /// Both borders are Inclusive
+        /// </summary>
+        /// <param name="minvalue"></param>
+        /// <param name="maxvalue"></param>
+        /// <returns>int</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static int RandomNumberGenerator(int minvalue, int maxvalue) 
+        { 
+            System.Random random = new System.Random();
+            if (minvalue > maxvalue) 
+            { 
+                throw new ArgumentException("minValue should be less than or equal to maxValue.");
+            }
+            
+            return random.Next(minvalue, maxvalue + 1);
         }
     }
 }
