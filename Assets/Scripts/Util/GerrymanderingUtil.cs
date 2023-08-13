@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Util
 {
-    public enum DiagonalDirection
+    public enum Direction
     {
         Left,
         TopLeft,
@@ -22,34 +22,34 @@ namespace Util
     {
 
         [Pure]
-        public static DiagonalDirection VecToDiagDir(Vector3Int origin, Vector3Int next)
+        public static Direction VecToDir(Vector3Int origin, Vector3Int next)
         {
             var diff = origin - next;
             
-            if (diff == Vector3Int.left) return DiagonalDirection.Left;
-            if (diff == new Vector3Int(-1, 1, 0)) return DiagonalDirection.TopLeft;
-            if (diff == Vector3Int.up) return DiagonalDirection.Top;
-            if (diff == new Vector3Int(1, 1, 0)) return DiagonalDirection.TopRight;
-            if (diff == Vector3Int.right) return DiagonalDirection.Right;
-            if (diff == new Vector3Int(1, -1, 0)) return DiagonalDirection.BottomRight;
-            if (diff == Vector3Int.down) return DiagonalDirection.Bottom;
-            if (diff == new Vector3Int(-1, -1, 0)) return DiagonalDirection.BottomLeft;
+            if (diff == Vector3Int.left) return Direction.Left;
+            if (diff == new Vector3Int(-1, 1, 0)) return Direction.TopLeft;
+            if (diff == Vector3Int.up) return Direction.Top;
+            if (diff == new Vector3Int(1, 1, 0)) return Direction.TopRight;
+            if (diff == Vector3Int.right) return Direction.Right;
+            if (diff == new Vector3Int(1, -1, 0)) return Direction.BottomRight;
+            if (diff == Vector3Int.down) return Direction.Bottom;
+            if (diff == new Vector3Int(-1, -1, 0)) return Direction.BottomLeft;
             throw new ArgumentException("out of range for difference " + diff);
         } 
         
         [Pure]
-        public static Vector3Int DiagDirToVec(DiagonalDirection direction)
+        public static Vector3Int DirToVec(Direction direction)
         {
             return direction switch
             {
-                DiagonalDirection.Left => Vector3Int.left,
-                DiagonalDirection.TopLeft => new Vector3Int(-1, 1, 0),
-                DiagonalDirection.Top => Vector3Int.up,
-                DiagonalDirection.TopRight => new Vector3Int(1, 1, 0),
-                DiagonalDirection.Right => Vector3Int.right,
-                DiagonalDirection.BottomRight => new Vector3Int(1, -1, 0),
-                DiagonalDirection.Bottom => Vector3Int.down,
-                DiagonalDirection.BottomLeft => new Vector3Int(-1, -1, 0),
+                Direction.Left => Vector3Int.left,
+                Direction.TopLeft => new Vector3Int(-1, 1, 0),
+                Direction.Top => Vector3Int.up,
+                Direction.TopRight => new Vector3Int(1, 1, 0),
+                Direction.Right => Vector3Int.right,
+                Direction.BottomRight => new Vector3Int(1, -1, 0),
+                Direction.Bottom => Vector3Int.down,
+                Direction.BottomLeft => new Vector3Int(-1, -1, 0),
                 _ => Vector3Int.zero
             };
         }
