@@ -31,9 +31,17 @@ namespace Manager
         private void Awake()
         {
             BorderTilesByParty = new[] { borderTilesNeutral, borderTilesDemocrats, borderTilesRepublicans };
+            
+            GameObject districts = Resources.Load<GameObject>("Districts");
+            if (districts == null) {
+                Debug.Log("Districts not found loaded");
+                return;
+            }
+            Instantiate(districts, GameObject.FindGameObjectWithTag("Grid").transform);
+            districtMap = districts.GetComponent<Tilemap>();
         }
 
-        private void OnValidate()
+        private void Start()
         {
             if (districtMap == null) throw new ArgumentException();
             if (markMap == null) throw new ArgumentException();

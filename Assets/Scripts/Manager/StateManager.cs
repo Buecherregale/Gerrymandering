@@ -126,12 +126,14 @@ namespace Manager
                 countyManager.Clear(district.County);
                 return;
             }
+            
             // draw new county
             _drawingCounty = true;
             _currentCounty = new County();
 
             if (!countyManager.AddDistrict(_currentCounty, district)) return;
             AddCounty(_currentState, _currentCounty);
+            Debug.Log("begin drawing county");
         }
         
         private void OnInpDrag(Vector3 pos)
