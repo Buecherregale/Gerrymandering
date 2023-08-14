@@ -28,5 +28,9 @@ namespace Model
             Id = _instanceCounter;
             _instanceCounter++;
         }
+        ~County()
+        {
+            _instanceCounter--;
+        }
     }
 }

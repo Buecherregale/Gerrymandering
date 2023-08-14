@@ -2,8 +2,11 @@
 using System.Linq;
 using JetBrains.Annotations;
 using Model;
+using TMPro;
 using Unity;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Util;
 
 namespace Manager
@@ -20,11 +23,27 @@ namespace Manager
         [SerializeField] private int maxCountySize = 3;
         public int MaxCountySize => maxCountySize;
 
+        private int maxCounties;
+        private int currentCountyCount;
+        
+        [FormerlySerializedAs("text")] [SerializeField] 
+        private TextMeshProUGUI uiText;
+
         [NotNull]
         private readonly State _currentState = new ();
 
         private County _currentCounty;
         private bool _drawingCounty;
+
+        private Faction _factionToWin;
+        
+        public void SetWinningFaction(Faction faction)
+        {
+            if (faction == Faction.Neutral) {
+                Debug.LogError("Faction.Neutral is not a valid faction to win");
+            }
+            _factionToWin = faction;
+        }
 
         /// <summary>
         /// adds a county to the state
@@ -35,9 +54,12 @@ namespace Manager
         public bool AddCounty([NotNull] State state, [NotNull] County county)
         {
             if (state.Counties.Contains(county)) return false;
-            
+
             state.Counties.Add(county);
             state.Winning = CalculateDominant(state);
+            
+            currentCountyCount = state.Counties.Count;
+            
             return true;
         }
 
@@ -79,6 +101,15 @@ namespace Manager
             return (Faction) maxInd;
         }
 
+        /// <summary>
+        /// set the max counties by dividing the district count by the max county size
+        /// set the text to the faction to win
+        /// </summary>
+        private void Start() {
+            maxCounties = districtManager.GetDistrictCount() / maxCountySize;
+            uiText.text = "take the " + _factionToWin + " to win";
+        }
+
         #region Event Functions
 
         private void OnEnable()
@@ -106,10 +137,11 @@ namespace Manager
             if (district!.County != null)
             {
                 // delete county
-                countyManager.Clear(district.County);
                 RemoveCounty(_currentState, district.County);
+                countyManager.Clear(district.County);
                 return;
             }
+            
             // draw new county
             _drawingCounty = true;
             _currentCounty = new County();
@@ -135,7 +167,7 @@ namespace Manager
         {
             if (!_drawingCounty) return;
 
-            if (_currentCounty.Size < 2 || _currentCounty.Size > maxCountySize)
+            if (_currentCounty.Size != maxCountySize)
             {
                 countyManager.Clear(_currentCounty);
                 RemoveCounty(_currentState, _currentCounty);
@@ -143,6 +175,11 @@ namespace Manager
 
             _drawingCounty = false;
             _currentCounty = null;
+            
+            // check if won
+            if (currentCountyCount == maxCounties && _currentState.Winning == _factionToWin) {
+                uiText.text = "You took the " + _factionToWin + " to win the state";
+            }
         }
 
         #endregion

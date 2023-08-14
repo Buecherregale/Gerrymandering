@@ -27,5 +27,9 @@ namespace Model
             Id = _instanceCounter;
             _instanceCounter++;
         }
+        ~State()
+        {
+            _instanceCounter--;
+        }
     }
 }

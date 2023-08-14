@@ -20,6 +20,10 @@ namespace Manager
         
         [NotNull] private readonly Dictionary<Vector3Int, District> _districts = new();
 
+        public int GetDistrictCount() {
+            return _districts.Count;
+        }
+
         /// <summary>
         /// calculates all neighbouring districts
         /// does not use diagonal neighbours
@@ -137,11 +141,11 @@ namespace Manager
         
         /// <summary>
         /// needs to be the first thing called
-        /// awake or start?
+        /// gets called by <see cref="TileManager.Awake()"/>
         /// enters the information for every tile
         /// tiles in <see cref="TileManager.districtMap"/> have to be <see cref="DistrictTile">Districts</see>
         /// </summary>
-        private void Start()
+        public void LoadEveryTile()
         {
             // load all districts of district map 
             var bounds = tileManager.districtMap.cellBounds;
