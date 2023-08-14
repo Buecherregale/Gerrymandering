@@ -20,7 +20,7 @@ public class StartButtons : MonoBehaviour {
     }
 
     public void StartStory() {
-        throw new NotImplementedException();
+        SceneManager.LoadScene(2);
     }
 
     /// <summary>
@@ -33,7 +33,7 @@ public class StartButtons : MonoBehaviour {
         {
             PlayerPrefs.SetString("difficulty", difficulty.ToString());
             PlayerPrefs.Save();
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
         else {
             throw new NotImplementedException();
