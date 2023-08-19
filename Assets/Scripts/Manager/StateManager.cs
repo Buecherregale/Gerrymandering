@@ -8,7 +8,6 @@ using Unity;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 using Util;
 
 namespace Manager
@@ -25,17 +24,17 @@ namespace Manager
         [SerializeField] private int maxCountySize = 3;
         [SerializeField] private int maxCountyAmount = 5;
         
-        public int MaxCountySize => maxCountySize;
+        [FormerlySerializedAs("text")] [SerializeField] 
+        private TextMeshProUGUI uiText;
+        
+        [Tooltip("No need to add any functions here. Done automatically")]
+        public readonly UnityEvent CountyAmountUpdated = new();
+        
         public int MaxCountyAmount => maxCountyAmount;
         public int CurrentCountyAmount => _currentState.Size;
 
         private int maxCounties;
         private int currentCountyCount;
-        
-        [FormerlySerializedAs("text")] [SerializeField] 
-        private TextMeshProUGUI uiText;
-
-        public UnityEvent countyAmountUpdated = new();
         
         [NotNull]
         private readonly State _currentState = new ();
@@ -158,12 +157,10 @@ namespace Manager
             if (district!.County != null)
             {
                 // delete county
-                RemoveCounty(_currentState, district.County);
-                countyManager.Clear(district.County);
                 RemoveCounty(_currentState, district.County);                                                           // for some reason they have to be in that order
                 countyManager.Clear(district.County);
                 
-                countyAmountUpdated.Invoke();
+                CountyAmountUpdated.Invoke();
                 return;
             }
             
@@ -191,15 +188,13 @@ namespace Manager
         private void OnInpEnd(Vector3 pos)
         {
             if (!_drawingCounty) return;
-
-            if (_currentCounty.Size != maxCountySize)
             
             if (_currentCounty.Size < 2 || _currentCounty.Size > maxCountySize)
             {
                 countyManager.Clear(_currentCounty);
                 RemoveCounty(_currentState, _currentCounty);
             }
-            countyAmountUpdated.Invoke();
+            CountyAmountUpdated.Invoke();
             _drawingCounty = false;
             _currentCounty = null;
             
@@ -208,7 +203,7 @@ namespace Manager
                 uiText.text = "You took the " + _factionToWin + " to win the state";
             }
             
-            countyAmountUpdated.Invoke();
+            CountyAmountUpdated.Invoke();
         }
 
         #endregion

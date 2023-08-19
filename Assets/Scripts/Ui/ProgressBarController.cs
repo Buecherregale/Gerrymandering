@@ -48,7 +48,7 @@ namespace Ui
             _rhsText = rhs.GetComponentInChildren<Text>();
             _neutralText = neutral.GetComponentInChildren<Text>();
             
-            stateManager.countyAmountUpdated.AddListener(CountyUpdated);
+            stateManager.CountyAmountUpdated.AddListener(CountyUpdated);
             
             // call it once for setup
             CountyUpdated();
